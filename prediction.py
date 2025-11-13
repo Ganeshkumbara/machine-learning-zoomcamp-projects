@@ -1,6 +1,7 @@
 import json
 import pickle
 import pandas as pd
+import os
 from flask import Flask, jsonify, request
 
 
@@ -39,5 +40,6 @@ def ping():
 
 
 if __name__ == "__main__":
-    # gunicorn  -b 0.0.0.0:8080 --workers 1 --threads 4 --timeout 12000 app:app --reload
-    app.run()
+    # For local development
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)

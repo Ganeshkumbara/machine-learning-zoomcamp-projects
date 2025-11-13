@@ -29,6 +29,7 @@ wheels/
 
 # Machine Learning
 *.pkl
+!salary_model.pkl
 *.h5
 *.model
 *.joblib
