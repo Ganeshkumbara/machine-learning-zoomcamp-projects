@@ -2,6 +2,6 @@ services:
   - type: web
     name: salary-prediction-api
     env: docker
-    dockerfilePath: render_server_files/Dockerfile
-    dockerContext: render_server_files
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./render_server_files
     plan: free
