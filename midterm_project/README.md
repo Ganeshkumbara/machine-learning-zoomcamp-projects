@@ -294,6 +294,62 @@ docker rm salary-server
 
 ---
 
+## Cloud Deployment on Render
+
+The salary prediction model is deployed on **Render.com** as a production-ready web service, accessible globally via HTTPS.
+
+**Live Service URL:** https://machine-learning-zoomcamp-projects-3.onrender.com
+
+### Making Predictions on Render
+
+**Method 1: Using the provided Python script**
+
+```bash
+cd render_server_files
+python raise_request.py
+```
+
+The script automatically sends a request to the Render server with sample data and displays the predicted salary.
+
+**Method 2: Manual request with cURL**
+
+```bash
+curl -X POST https://machine-learning-zoomcamp-projects-3.onrender.com/predict_salary \
+  -H "Content-Type: application/json" \
+  -d @render_server_files/sample_customer.json
+```
+
+**Method 3: Python requests library**
+
+```python
+import json
+import requests
+
+url = "https://machine-learning-zoomcamp-projects-3.onrender.com/predict_salary"
+
+with open("render_server_files/sample_customer.json") as f:
+    payload = json.load(f)
+
+response = requests.post(url, json=payload)
+print(response.json())
+```
+
+**Health Check:**
+```bash
+curl https://machine-learning-zoomcamp-projects-3.onrender.com/ping
+```
+
+**Response format:**
+```json
+{
+  "Details": "Predicted average salary: $XX.XXk"
+}
+```
+
+**⚠️ Note:** Render's free tier spins down services after 15 minutes of inactivity. The first request may take 30-60 seconds to wake up the service.
+
+---
+
 ## API Endpoints
 
 ### POST `/predict`
